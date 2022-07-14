@@ -10,10 +10,22 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:node-autoincrement-version.helloWorld"
+        "onStartupFinished"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Node Version Auto-increments",
+			"properties": {
+			  "version.options": {
+				"type": "string",
+				"default": "patch",
+				"enum": ["major", "minor", "patch"],
+				"description": "Version to increment on Git Add/Stage"
+			  }
+			}
+		  },
 		"commands": [
 			{
 				"command": "node-autoincrement-version.helloWorld",
