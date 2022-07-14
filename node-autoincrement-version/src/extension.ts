@@ -6,12 +6,17 @@ console.log('gitExtension', gitExtension)
 export const gitApi = gitExtension?.getAPI(1);
 console.log('gitApi', gitApi);
 
+const getPackageJsonFilePath = async () => {
+	return await vscode.workspace.findFiles('**/package.json', '**/node_modules/**/package.json');
+}
+
 const updatePackageJson = async () => {
 	// The code you place here will be executed every time your command is executed
 	// Display a message box to the user
-	const packageJsonUri: vscode.Uri = (await vscode.workspace.findFiles('**/package.json', '**/node_modules/**/package.json'))[0];
-	const packageJsonDocument = (await vscode.workspace.fs.readFile(packageJsonUri));
-	console.log('packageJsonDocument', packageJsonDocument)
+	const packageJsonUri: vscode.Uri = (await getPackageJsonFilePath())[0];
+	const packageJsonDocument = (await vscode.workspace.openTextDocument(packageJsonUri));
+	let text = packageJsonDocument.getText();
+	console.log('packageJsonDocument', text)
 };
 
 
@@ -36,7 +41,7 @@ export async function activate(context: vscode.ExtensionContext) {
 
 const hasPackageJson = async () : Promise<boolean> => {
 	if(vscode.workspace.workspaceFolders) {
-		return (await vscode.workspace.findFiles('**/package.json', '**/node_modules/**/package.json')).length > 0;
+		return (await getPackageJsonFilePath()).length > 0;
 	}
 	return false;
 };
