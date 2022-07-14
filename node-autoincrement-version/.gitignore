@@ -1,0 +1,33 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# VsCode
+*.code-workspace
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+/dist
+dist/
+dist
+/configViewer
+*.vsix
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+/out
+.tours
+# secrets
+secrets.*.js
+
+# zip
+*.zip
