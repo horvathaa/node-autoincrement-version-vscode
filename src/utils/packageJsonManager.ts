@@ -61,7 +61,9 @@ export const updatePackageJson = async () => {
             getRangeOfSubstring(rawText, versionText),
             updatedVersion
         );
-        vscode.workspace.applyEdit(wsEdit);
+        //TODO: ERROR CHECK BOOLS
+        const applyEditBool = await vscode.workspace.applyEdit(wsEdit);
+        const saveBool = await packageJsonDocument.save();
     } catch (error) {
         console.error('Something went wrong', error);
         throw error;
